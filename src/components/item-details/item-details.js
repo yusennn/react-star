@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import ErrorButton from '../error-button';
-import SwapiService from '../../services/swapi-service';
 
 import './item-details.css';
 
@@ -12,31 +11,23 @@ const Record = ({item, field, label}) => {
         </li>
     )
 };
-
 export {Record};
-
 export default class ItemDetails extends Component {
-
     state = {
         item: null,
         image: null
     };
-
     componentDidMount() {
         this.updateItem()
     }
-
     componentDidUpdate(prevProps, prevState, snapshot) {
         if(this.props.itemId !== prevProps.itemId) {
             this.updateItem()
         }
     }
-
-
     updateItem() {
         const {itemId, getData, getImageUrl} = this.props;
         if(!itemId) return;
-
         getData(itemId)
             .then( (item) => {
                 this.setState({
@@ -45,25 +36,21 @@ export default class ItemDetails extends Component {
                 })
             })
     }
-
-
     render() {
         const {item, image} = this.state;
-
         if(!item)
             return <span>Select a item from a list.</span>;
 
-        const {id, name, gender, birthYear, eyeColor} = this.state.item;
+        const {name} = this.state.item;
 
         return (
             <div className="item-details card">
                 <img className="item-image" src={image} />
-
                 <div className="card-body">
                     <h4>{name}</h4>
                         <ul className="list-group list-group-flush">
                             {
-                                React.Children.map(this.props.children, (child, idx) => {
+                                React.Children.map(this.props.children, (child) => {
                                     return React.cloneElement(child, {item});
                                 })
                             }
