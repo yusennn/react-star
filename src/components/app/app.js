@@ -11,9 +11,6 @@ import ItemDetails, {Record} from "../item-details/item-details";
 import SwapiService from "../../services/swapi-service";
 import ErrorBoundry from "../error-boundry";
 import {PersonList, PlanetList, StarshipList, PersonDetails, StarshipDetails, PlanetDetails} from "../sw-components";
-
-
-
 export default class App extends Component{
     swapiService = new SwapiService();
     state = {
@@ -26,14 +23,12 @@ export default class App extends Component{
     };
     render() {
         const planet = this.state.showRandomPlanet ? <RandomPlanet /> : null;
-
         /*const { getPerson,
             getStarship,
             getPersonImage,
             getStarshipImage,
             getAllPeople,
             getAllPlanets } = this.swapiService;*/
-
         /*const personDetails = <ItemDetails
             itemId={11}
             getData={getPerson}
@@ -51,7 +46,6 @@ export default class App extends Component{
             <Record field="length" label="Length"/>
             <Record field="costInCredits" label="Cost"/>
         </ItemDetails>;*/
-
         return (
             <ErrorBoundry>
                 <div className='container-fluid'>
@@ -60,22 +54,13 @@ export default class App extends Component{
                             <Header/>
                         </div>
                     </div>
-
                     <PersonDetails itemId={11} />
                     <StarshipDetails itemId={5} />
                     <PlanetDetails itemId={9} />
 
-                    <PersonList>
-                        { ({name}) => <span>{name}</span> }
-                    </PersonList>
-
-                    <StarshipList>
-                        { ({name}) => <span>{name}</span> }
-                    </StarshipList>
-
-                    <PlanetList>
-                        { ({name}) => <span>{name}</span> }
-                    </PlanetList>
+                    <PersonList />
+                    <StarshipList />
+                    <PlanetList />
 
                     {/*<ItemList
                         getData={getAllPlanets}
